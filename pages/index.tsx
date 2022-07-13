@@ -1,7 +1,57 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  RefreshIcon,
+  LockClosedIcon,
+} from "@heroicons/react/solid";
+import { HomeIcon } from "@heroicons/react/outline";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { ErrorMessage } from "@hookform/error-message";
+import axios from "axios";
+import useThemeDetector from "../hooks/isDarkTheme";
 
 const Home: NextPage = () => {
+  const isDarkTheme = useThemeDetector();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const onSubmit = async (data: any) => {
+    const res = await axios.post("/api/createlink", {
+      url: data.url,
+    });
+    toast.success("Shortlink copied to clipboard", {
+      position: "top-left",
+      autoClose: 2000,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+    await navigator.clipboard.writeText(
+      `https://u.forestp.dev/${res.data.slug}`
+    );
+    reset();
+  };
+
+  const onError = (error: any) => {
+    console.log("🚀 ~ file: index.tsx ~ line 47 ~ onError ~ error", error);
+    toast.error(error.url.message, {
+      position: "top-left",
+      autoClose: 2000,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <div className="flex flex-col items-start justify-center h-screen bg-blue-100 gap-4 px-8">
       <Head>
