@@ -90,7 +90,7 @@ const Home: NextPage = () => {
                   },
                 })}
                 type="text"
-                className="focus:ring-blue-400 focus:border-blue-400 block rounded-full w-full pl-10 sm:text-sm border-gray-300 placeholder-gray-300"
+                className="focus:ring-blue-400 focus:border-blue-400 block rounded-full w-full pl-10 sm:text-sm border-gray-300 placeholder-gray-300 p-2"
                 placeholder="https://example.com"
               />
             </form>
