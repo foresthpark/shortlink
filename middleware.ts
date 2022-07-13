@@ -19,6 +19,8 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     if (data?.url) {
       return NextResponse.redirect(data.url);
     }
+
+    if (!data?.url) return;
   }
 
   return;

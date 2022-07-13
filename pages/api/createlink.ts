@@ -15,10 +15,22 @@ function randomString(length: number): string {
 }
 
 const createLink = async (req: NextApiRequest, res: NextApiResponse) => {
-  const url = req.body?.url;
-  const rngStr = randomString(8);
+  const url: string = req.body?.url;
+  const rngStr: string = randomString(8);
 
   try {
+    const link = await prisma.shortLink.findFirst({
+      where: {
+        url,
+      },
+    });
+
+    if (link) {
+      return res.send({
+        message: "Link already exists",
+      });
+    }
+
     const data: ShortLink = await prisma.shortLink.create({
       data: {
         slug: rngStr,

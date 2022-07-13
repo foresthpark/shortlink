@@ -12,8 +12,12 @@ import { toast } from "react-toastify";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import useThemeDetector from "../hooks/isDarkTheme";
+import { useState } from "react";
+import SlugList from "../components/modal";
 
 const Home: NextPage = () => {
+  const [open, setOpen] = useState(false);
+
   const isDarkTheme = useThemeDetector();
 
   const {
@@ -98,6 +102,8 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="text-6xl font-semibold text-gray-800">the better</div>
+      {/* <button onClick={() => setOpen(true)}>Click me</button> */}
+      <SlugList open={open} setOpen={setOpen} />
     </div>
   );
 };

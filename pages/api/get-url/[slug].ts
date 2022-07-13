@@ -15,10 +15,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       slug,
     },
   });
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
   if (!data) {
-    res.setHeader("Content-Type", "application/json");
-    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Cache-Control", "s-maxage=1000000, stale-while-revalidate");
 
     return res.status(404).send({ error: "No slug found" });
