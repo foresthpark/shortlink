@@ -53,7 +53,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-start justify-center h-screen bg-blue-100 gap-4 px-8">
+    <div className="flex flex-col items-start justify-center h-screen bg-red-100 gap-4 px-8">
       <Head>
         <title>Shorter the better</title>
       </Head>
