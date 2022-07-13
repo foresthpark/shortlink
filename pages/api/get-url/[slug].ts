@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const slug = req.query["slug"] as string;
 
   if (!slug || typeof slug !== "string") {
-    res.status(404).send({ error: "No slug provided" });
+    return res.status(404).send({ error: "No slug provided" });
   }
 
   const data: ShortLink | null = await prisma.shortLink.findFirst({
@@ -21,9 +21,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Cache-Control", "s-maxage=1000000, stale-while-revalidate");
 
-    res.status(404).send({ error: "No slug found" });
+    return res.status(404).send({ error: "No slug found" });
   }
-
   res.setHeader("Cache-Control", "s-maxage=1000000, stale-while-revalidate");
+
   return res.json(data);
 };
