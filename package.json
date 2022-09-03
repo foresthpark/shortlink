@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "connectdb": "pscale org switch shortener && pscale connect fshort main"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
